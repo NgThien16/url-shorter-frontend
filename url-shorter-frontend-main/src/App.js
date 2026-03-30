@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>🔗 URL Shortener</h1>
+      <h1 style={styles.title}>🔗 URL Shortener v1.0</h1>
       <p style={styles.subtitle}>Convert your long URLs into short links</p>
 
       <div style={styles.inputBox}>
