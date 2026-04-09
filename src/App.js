@@ -16,6 +16,8 @@ function App() {
     }
   };
 
+  console.log("Check API URL:", process.env.REACT_APP_API_URL);
+
   const handleShorten = async () => {
     if (!url) {
       setError('Please enter a URL!');
@@ -30,11 +32,14 @@ function App() {
     setShortUrl('');
 
     try {
-      const response = await fetch('http://localhost:5000/shorten', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url })
-      });
+   // Xóa cái đoạn process.env đi và thay trực tiếp bằng link này:
+const response = await fetch('https://url-shortener-api-latest-66j8.onrender.com/shorten', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ url: url }) // biến url này tùy vào code của ông
+});
 
       const data = await response.json();
       setShortUrl(data.shortUrl);
