@@ -32,14 +32,14 @@ function App() {
     setShortUrl('');
 
     try {
-   // Xóa cái đoạn process.env đi và thay trực tiếp bằng link này:
-// Đổi chữ /shorten thành /api/Urls
+  
 const response = await fetch('https://url-shortener-api-latest-66j8.onrender.com/api/Urls', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ url: url }) 
+    // CHỈ SỬA ĐÚNG DÒNG NÀY: Bỏ ngoặc nhọn {} đi nhé!
+    body: JSON.stringify(url) 
 });
 
       const data = await response.json();
