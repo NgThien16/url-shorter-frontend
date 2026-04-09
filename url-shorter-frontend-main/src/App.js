@@ -7,8 +7,24 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const validateUrl = (url) => {
+    try {
+      const newUrl = new URL(url);
+      return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  };
+
   const handleShorten = async () => {
-    if (!url) return;
+    if (!url) {
+      setError('Please enter a URL!');
+      return;
+    }
+    if (!validateUrl(url)) {
+      setError('Invalid URL! Please enter a valid URL (e.g. https://google.com)');
+      return;
+    }
     setLoading(true);
     setError('');
     setShortUrl('');
@@ -46,14 +62,17 @@ function App() {
           placeholder="Enter your long URL here..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          style={styles.input}
+          style={{
+            ...styles.input,
+            border: error ? '1px solid red' : '1px solid #ccc'
+          }}
         />
         <button onClick={handleShorten} style={styles.button} disabled={loading}>
           {loading ? 'Processing...' : 'Shorten'}
         </button>
       </div>
 
-      {error && <p style={styles.error}>{error}</p>}
+      {error && <p style={styles.error}>⚠️ {error}</p>}
 
       {shortUrl && (
         <div style={styles.resultBox}>
