@@ -34,15 +34,18 @@ function App() {
       const response = await fetch('https://url-shortener-api-latest-66j8.onrender.com/api/Urls', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(url) // Gửi chuỗi thuần theo đúng Swagger
+        body: JSON.stringify(url) 
       });
 
       if (response.ok) {
-        // Bóc quà dạng Text vì Backend Thiện trả về string
-        const shortCode = await response.text(); 
+        // BƯỚC QUAN TRỌNG: Đọc dạng JSON thay vì Text
+        const data = await response.json(); 
         
-        // Ghép code vào link để hiển thị
-        const fullShortUrl = `https://url-shortener-api-latest-66j8.onrender.com/api/Urls/${shortCode}`;
+        // Lấy đúng cái shortCode từ trong đống data Thiện gửi về
+        const code = data.shortCode; 
+        
+        // Ghép code vào link để hiển thị cho đẹp
+        const fullShortUrl = `https://url-shortener-api-latest-66j8.onrender.com/api/Urls/${code}`;
         setShortUrl(fullShortUrl);
       } else {
         setError('Server returned an error. Please check your URL.');
