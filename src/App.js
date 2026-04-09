@@ -35,12 +35,19 @@ function App() {
   
 const response = await fetch('https://url-shortener-api-latest-66j8.onrender.com/api/Urls', {
     method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    // CHỈ SỬA ĐÚNG DÒNG NÀY: Bỏ ngoặc nhọn {} đi nhé!
-    body: JSON.stringify(url) 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(url)
 });
+
+if (response.ok) {
+    // THAY DÒNG await response.json() THÀNH DÒNG NÀY:
+    const shortCode = await response.text(); 
+    
+    // Sau đó ông dùng cái shortCode này để hiển thị ra màn hình
+    setShortenedUrl(`https://url-shortener-api-latest-66j8.onrender.com/api/Urls/${shortCode}`);
+} else {
+    // Xử lý lỗi nếu không ok
+}
 
       const data = await response.json();
       setShortUrl(data.shortUrl);
