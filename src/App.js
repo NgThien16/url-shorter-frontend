@@ -33,12 +33,13 @@ function App() {
 
     try {
    // Xóa cái đoạn process.env đi và thay trực tiếp bằng link này:
-const response = await fetch('https://url-shortener-api-latest-66j8.onrender.com/shorten', {
+// Đổi chữ /shorten thành /api/Urls
+const response = await fetch('https://url-shortener-api-latest-66j8.onrender.com/api/Urls', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ url: url }) // biến url này tùy vào code của ông
+    body: JSON.stringify({ url: url }) 
 });
 
       const data = await response.json();
